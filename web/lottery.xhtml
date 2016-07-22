@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/masterLayout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="contentSection">
+        <div id="gameBox">
+            <h:form id="lottoForm">
+                <div id="buttons">
+                    Current JackPot!!
+                    <h:outputText id="potVal" value="#{lotteryBean.currentPot}"/>
+                </div>
+                <table>
+                    <tr>
+                        <td>
+                            Choose your Numbers!
+                        </td>
+                        <td>
+                            Entry Price:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p:spinner id ="n1" value="#{lotteryBean.previousNumber1}" min="0" max ="9" binding="#{number1}"/>
+                                    </td>
+                                    <td>
+                                        <p:spinner id ="n2" value="#{lotteryBean.previousNumber2}" min="0" max ="9" binding="#{number2}"/>
+                                    </td>
+                                    <td>
+                                        <p:spinner id ="n3" value="#{lotteryBean.previousNumber3}" min="0" max ="9" binding="#{number3}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <p:growl id="messages" showDetail="true"/>
+                            <p:commandButton rendered="#{loginBean.loggedIn}" value="500 Tokens" update=":userBalance, messages" actionListener="#{cashierBean.buyLotteryTicket(number1.value, number2.value, number3.value)}"></p:commandButton>
+                            <p:commandButton rendered="#{not loginBean.loggedIn}" value="500 Tokens" update=":userBalance, messages" action="notLoggedIn"></p:commandButton>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Next Drawing in
+                            <h:outputText id ="txt_count" value="#{lotteryBean.secondsLeft}"/>
+                            <p:poll interval="1" update="txt_count potVal" />
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </div>
+        <br/><br/><br/><br/>
+        <div id="buttons">
+            <h1>
+                <b>Lottery Rules:</b><br/>
+                Tickets are drawn from lottery every 60 seconds!<br/>
+                Winning numbers must be the <b>correct digit</b> in the <b>correct order</b>.<br/>
+                Prizes for winning tickets are as follows:<br/>
+                <table>
+                    <tr>
+                        <td>
+                            <b>One number Match</b>
+                        </td>
+                        <td>
+                            1000 Tokens!
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Two numbers Match</b>
+                        </td>
+                        <td>
+                            5000 Tokens!
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>All numbers Match</b>
+                        </td>
+                        <td>
+                            JACKPOT!!!!
+                        </td>
+                    </tr>
+
+                </table>
+
+            </h1>
+
+        </div>
+    </ui:define>
+
+</ui:composition>

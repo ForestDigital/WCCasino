@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/masterLayout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="contentSection">
+        <div id="gameBox">
+            <p:tabView>
+                <p:tab title="Lucky Streak">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <p:graphicImage value="/ImageServlet?filename=#{'scratcher1.jpg'}" width="337" height="400"/>
+                        <h:outputText
+                            value="Average Winnings: 500-3000 tokens" />
+
+                        <h:form>
+                            <p:growl id="messages" showDetail="true"/>
+                            <p:commandButton rendered="#{loginBean.loggedIn}" value="500 Tokens" update=":userBalance, messages" actionListener="#{cashierBean.purchaseScratcher(1)}"/>
+                            <p:commandButton rendered="#{not loginBean.loggedIn}" value="500 Tokens" update=":userBalance, messages" action="notLoggedIn"/>
+
+                        </h:form>
+                    </h:panelGrid>
+
+                </p:tab>
+                <p:tab title="NCR Ranger">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:graphicImage value="/ImageServlet?filename=#{'scratcher2.jpg'}" />
+                        <h:outputText value="Average Winnings: 1000-10000 tokens" />
+                        <h:form>
+                            <p:growl id="messages" showDetail="true"/>
+                            <p:commandButton rendered="#{loginBean.loggedIn}" value="1000 Tokens" update=":userBalance, messages" actionListener="#{cashierBean.purchaseScratcher(2)}"/>
+                            <p:commandButton rendered="#{not loginBean.loggedIn}" value="1000 Tokens" update=":userBalance, messages" action="notLoggedIn"/>
+                        </h:form>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Mysterious Stranger">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <p:graphicImage value="/ImageServlet?filename=#{'scratcher3.jpg'}" />
+                        <h:outputText value="Average Winnings: 5000-20000 tokens" />
+                        <h:form>
+                            <p:growl id="messages" showDetail="true"/>
+                            <p:commandButton rendered="#{loginBean.loggedIn}" value="3000 Tokens" update=":userBalance, messages" actionListener="#{cashierBean.purchaseScratcher(3)}"/>
+                            <p:commandButton rendered="#{not loginBean.loggedIn}" value="3000 Tokens" update=":userBalance, messages" action="notLoggedIn"/>
+                        </h:form>
+                    </h:panelGrid>
+                </p:tab>
+            </p:tabView>
+        </div>
+    </ui:define>
+
+</ui:composition>

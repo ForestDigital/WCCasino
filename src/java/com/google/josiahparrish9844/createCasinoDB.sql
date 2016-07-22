@@ -1,0 +1,37 @@
+/**
+ * Author:  jay-t
+ * Created: Apr 6, 2016
+ */
+DROP TABLE USERS;
+DROP TABLE GROUP_TABLE;
+
+create table USERS (
+    USER_ID INT NOT NULL AUTO_INCREMENT,
+    USERNAME VARCHAR(26),
+    PASSWORD VARCHAR(256),
+    IMAGENAME VARCHAR(255),
+    BALANCE INT,
+    BIO VARCHAR(2001),  /* binary data */
+    PRIMARY KEY (USER_ID)
+);
+
+create table GROUP_TABLE (
+    GROUP_ID INT NOT NULL AUTO_INCREMENT,
+    GROUPNAME VARCHAR(26),
+    USERNAME VARCHAR(26),
+    PRIMARY KEY (GROUP_ID)
+);
+
+-- create table GROUP_TABLE (
+--     GROUP_ID INT NOT NULL AUTO_INCREMEMT,
+--     GROUPNAME VARCHAR(26),
+--     USERNAME VARCHAR(26),
+--     PRIMARY KEY (GROUP_ID)
+-- );
+-- create table IMAGESTORAGE (
+--     IMAGENAME VARCHAR(255),
+--     IMAGE MEDIUMBLOB
+-- );
+
+INSERT INTO USERS (username, password) VALUES ('root', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8');
+INSERT INTO GROUP_TABLE (groupname, username) VALUES ('admingroup', 'root');

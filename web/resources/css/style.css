@@ -1,0 +1,97 @@
+#header {
+    border-radius: 5px;
+    background-image: url("../ImageServlet?filename=#{'poker-table-felt.jpg'}");
+    padding: 0px;
+}
+body {
+    background-image: url("../ImageServlet?filename=#{'poker.jpg'}");
+    background-size: cover;
+}
+table {
+    margin: auto;
+    text-align: center;
+}
+/*tr:hover {background-color: #eaeaea}*/
+
+td {    
+    padding: 0px 15px;
+}
+/*Gives cool cursor Highlight effect*/
+input[type=text],input[type=password] {
+    width: 90%;
+    padding: 8px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;                
+}
+#buttons, .ui-button, .ui-button-text{
+    /*    width: 90%;*/
+    background: linear-gradient(to bottom, #ff4c3f 0%,#aa0000 100%);
+    color: white;
+    /*    padding: 8px 10px;*/
+    margin: auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type=submit]{
+    width: 90%;
+    background: linear-gradient(to bottom, #ff4c3f 0%,#aa0000 100%);
+    color: white;
+    padding: 8px 10px;
+    margin: auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#logoutButton {
+    width: 10%;
+    color: white;
+    margin: 60px 60px;
+    border: none;
+    text-align: center;
+    font-size: 200%;
+    float: right;
+    border-radius: 4px;
+    cursor: pointer;
+}
+/*input[type=submit]:hover {
+    background-color: #195582;
+}*/
+#contentBox {
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-image: url("../ImageServlet?filename=#{'poker-table-felt.jpg'}");
+    padding: 0px;
+    padding: 40px;
+}
+
+#loginBox {
+    width: 50%;
+    margin: auto;
+    margin-top: 5%;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+    padding: 40px;
+}
+
+#gameBox {
+    width: 75%;
+    margin: auto;
+    margin-top: 5%;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+    padding: 40px;
+    color: white;
+
+}
+.ui-panelgrid {
+
+    background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+
+
+}

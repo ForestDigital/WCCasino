@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/masterLayout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="contentSection">
+        <div id="loginBox">
+            <h:form id = "login">
+                Username
+                <h:inputText id="username" binding="#{uname}" validatorMessage="More than 3 characters">
+
+
+                </h:inputText><p/>
+                <p>
+                </p>
+                Password
+                <h:inputSecret id="password" binding="#{pword}" validatorMessage="More than 6 characters">
+
+
+
+                </h:inputSecret><p/>
+
+
+                <h:commandButton value="Register!" action="#{loginBean.registerUser(uname.value, pword.value)}" />
+
+               
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

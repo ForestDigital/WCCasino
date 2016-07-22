@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title></title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    
+    <h:body>
+        <p:growl id="messages" showDetail="true"/>
+        <div id="header">
+            <h:link outcome="/index" >
+                <h:graphicImage value="/ImageServlet?filename=#{'logo.png'}" width="250" height="110" style="border: none" />
+            </h:link>
+            <h:form style="display: inline;">
+            <div id="logoutButton">
+                <p:commandButton value="Login" action="/login" rendered="#{not loginBean.loggedIn}" />
+                <p:commandButton value="Logout" rendered="#{loginBean.loggedIn}" action="#{loginBean.logout()}" />
+            </div></h:form>
+            <table rendered="#{loginBean.loggedIn}" style="float: right; margin: 5px 0px;">
+                <td>
+                    <h:link outcome="/user/profile" >
+                        <h:graphicImage rendered="#{loginBean.loggedIn}" value="/ImageServlet?filename=#{loginBean.imagename}" width="90" height="90" style="float: right; margin: 45px 0px;"/>
+                    </h:link>
+                </td><td>
+                    <h:outputText rendered="#{loginBean.loggedIn}" value="#{loginBean.username}"/> <p/>
+                    <h:outputText id="userBalance" rendered="#{loginBean.loggedIn}" value="#{loginBean.balance} tokens"/> 
+                </td>            
+            </table>
+            <table rendered="#{not loginBean.loggedIn}" style="float: right; margin: 5px 0px;">
+                <td>
+                <h:graphicImage rendered="#{not loginBean.loggedIn}" value="/ImageServlet?filename=#{'notloggedin.jpg'}" width="90" height="90" style="float: right; margin: 45px 0px;"/>
+                </td><td>
+                    <h:outputText rendered="#{not loginBean.loggedIn}" value="Not Logged in"/> <p/>
+                    <h:outputText rendered="#{not loginBean.loggedIn}" value="Login or Register!"/> 
+                </td>            
+            </table>
+            <div id="nav">
+            <ui:include src="/templates/menuList.xhtml"/>      
+            </div>
+        </div>
+        
+        <div id="contentBox">
+            <ui:insert name="contentSection"/>
+        </div>
+    </h:body>
+</html>
+

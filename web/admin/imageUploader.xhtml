@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>file upload and download with database</title>
+        <style>
+            .evenRow {
+                background: PowderBlue;
+            }
+            .oddRow {
+                background: MediumTurquoise;
+                font-style: italic;
+            }
+            .headerRow {
+                background: darkseagreen;
+                font-style: italic;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h3>File Upload/Download with Database</h3>
+        <!-- Form enctype should be multipart/form-data -->
+        <h:form id="uploadForm" enctype="multipart/form-data">
+            <h:panelGrid columns="3">
+                Upload File(max 10MB):
+                <h:inputFile id="file" label="file" value="#{fileBean.part}"
+                             validator="#{fileBean.validateFile}" />
+                <h:message for="file" errorStyle="color: red" infoStyle="color: blue"/>
+                Click to upload:
+                <h:commandButton id="upload" action="#{fileBean.uploadFile}"
+                                 value="upload file" />
+                <h:message for="upload" errorStyle="color: red" infoStyle="color: blue" />
+            </h:panelGrid>
+        </h:form>
+
+        <br/>
+        <h3>The List of Files in the Database</h3>
+        <h:dataTable value="#{fileBean.list}" var="file"
+                     headerClass="headerRow"
+                     rowClasses="evenRow,oddRow">
+            <h:column>
+                <f:facet name="header">image</f:facet>
+                <image src="/projectJosiahP/ImageServlet?filename=#{file.IMAGENAME}"
+                       height="70" width="100" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">FILE_NAME</f:facet>
+                    #{file.IMAGENAME}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Download</f:facet>
+                <h:form id="downloadForm">
+                    <h:commandButton id="download" value="Click to Download"
+                                     action="#{fileBean.downloadFile(file.IMAGENAME)}" />
+                    <h:message for="download" errorStyle="color: red" infoStyle="color: green" />
+                </h:form>
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</html>
+

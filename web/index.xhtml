@@ -1,0 +1,62 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/masterLayout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="contentSection">
+<!--        This stuff is only seen by the admin-->
+        <h:form style="display: inline;"> 
+            <f:facet name="header">
+                <h:outputText rendered="#{facesContext.externalContext.isUserInRole('admin')}" value="Administrative Actions:"/>
+            </f:facet>
+            <h:panelGrid rendered="#{facesContext.externalContext.isUserInRole('admin')}" columns="3">
+                <p:panel rendered="#{facesContext.externalContext.isUserInRole('admin')}" header="Administrative Tasks">
+                    <h:commandButton value="Admin Test Page" action="admin/admin1" rendered="#{facesContext.externalContext.isUserInRole('admin')}" /><br/>
+                    <h:commandButton value="Manage Site Images" action="admin/imageUploader" rendered="#{facesContext.externalContext.isUserInRole('admin')}" /><br/>
+                    <h:commandButton value="Manage Users" action="admin/userControl" rendered="#{facesContext.externalContext.isUserInRole('admin')}" /><br/>
+                    <h:commandButton value="Issue test payout" action="#{cashierBean.issuePayout('root', 1000000)}" rendered="#{facesContext.externalContext.isUserInRole('admin')}" />
+                </p:panel>
+                <p:panel rendered="#{facesContext.externalContext.isUserInRole('admin')}" header="Lottery Configuration:">
+                    <h:commandButton value="Start Lottery Systems" action="#{lotteryBean.init()}" rendered="#{facesContext.externalContext.isUserInRole('admin')}" />
+                    <h:commandButton value="Draw from lottery" action="#{lotteryBean.drawNumbers()}" rendered="#{facesContext.externalContext.isUserInRole('admin')}" /><br/>
+                    Debug Mode(winning numbers[1,1,1]):<h:selectBooleanCheckbox value="#{lotteryBean.DEBUG}" onclick="submit()"/>
+                </p:panel>
+                <p:panel rendered="#{facesContext.externalContext.isUserInRole('admin')}" header="Raffle Configuration:">
+                    <h:commandButton value="Start Raffle Systems" action="#{raffleBean.init()}" rendered="#{facesContext.externalContext.isUserInRole('admin')}" />
+                    <h:commandButton value="test raffle" action="#{cashierBean.buyRaffleTicket('root', 5, 100)}" rendered="#{facesContext.externalContext.isUserInRole('admin')}" />
+                </p:panel>
+            </h:panelGrid>
+
+        </h:form>
+
+
+
+
+        <div id="gameBox">
+            <p:imageSwitch effect="shuffle" style="margin: auto" speed="500" slideshowSpeed="5000">
+                <p:graphicImage value="/ImageServlet?filename=#{'slide1.png'}" height="500" width="800"/>
+                <p:graphicImage value="/ImageServlet?filename=#{'slide2.png'}" height="500" width="800"/>
+                <p:graphicImage value="/ImageServlet?filename=#{'slide3.png'}" height="500" width="800"/>
+            </p:imageSwitch>
+            <h:panelGrid columns="4">
+                <p:panel header="Total $$$ won in our Raffles:">
+                    <h:outputText value="#{cashierBean.totalRaffles} Tokens!"/>
+                </p:panel>
+                <p:panel header="Total $$$ won in with our Scratchcards:">
+                    <h:outputText value="#{cashierBean.totalScratchers} Tokens!"/>
+                </p:panel>
+                <p:panel header="Total $$$ won in our Lottery:">
+                    <h:outputText value="#{cashierBean.totalLottery} Tokens!"/>
+                </p:panel>
+                <p:panel header="Total $$$ won ON OUR SITE:">
+                    <h:outputText value="#{cashierBean.totalPayouts} Tokens!"/>
+                </p:panel>
+            </h:panelGrid>
+            <h:outputText value="#{loginBean.login()}"/>
+        </div>
+    </ui:define>
+
+</ui:composition>

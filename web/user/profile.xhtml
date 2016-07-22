@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/masterLayout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="contentSection">
+        <div id="loginBox">
+            <table>
+                <tr>
+                    Profile Picture:<p/>
+                    <image src="/projectJosiahP/ImageServlet?filename=#{loginBean.imagename}"
+                           height="300" width="300" />
+                </tr>
+                <tr>
+                    <h:form id="uploadForm" enctype="multipart/form-data">
+                        <h:panelGrid columns="3">
+                            Upload File(max 10MB):
+                            <h:inputFile id="file" label="file" value="#{fileBean.part}"
+                                         validator="#{fileBean.validateFile}" />
+                            <h:message for="file" errorStyle="color: red" infoStyle="color: blue"/>
+                            Click to upload:
+                            <h:commandButton id="upload" action="#{fileBean.uploadProfile}"
+                                             value="upload file" />
+                            <h:message for="upload" errorStyle="color: red" infoStyle="color: blue" />
+                        </h:panelGrid>
+                    </h:form>
+                </tr>
+            </table>
+            <table>
+                <td>
+                    <b>Name:</b><p/>
+                    <h:outputText value="#{loginBean.username}" style="font-size: 150%;" >
+
+                    </h:outputText>
+                    <p/><p/>
+                    <b>Bio:</b><p/>
+                    <h:form id="bioForm">
+                        <h:inputTextarea value="#{loginBean.bio}" id="bio"
+                                         rendered="#{loginBean.editable}" rows="5"/>
+                        <h:outputText value="#{loginBean.bio}" style="font-size: 150%;" 
+                                      rendered="#{not loginBean.editable}" >                    
+                        </h:outputText>
+                        <h:commandButton value="Edit Bio..." rendered="#{not loginBean.editable}"
+                                         action="#{loginBean.setEditable(true)}"/>
+                        <h:commandButton value="Save Bio..." rendered="#{loginBean.editable}"
+                                         action="#{loginBean.setBio(param['bioForm:bio'])}"/>
+                    </h:form>
+
+                    <p/><p/>
+                    <b>Balance:</b><p/>
+                    <h:outputText value="#{loginBean.balance}" style="font-size: 150%;" >
+
+                    </h:outputText>
+                    Tokens
+                    <p/><p/>
+                    <h:form id="promoEntry">
+                        <b>Promo Code:</b><p/>
+                        <h:inputText id="promoCode"></h:inputText>
+                        <h:commandButton action="#{loginBean.checkPromoCode(param['promoEntry:promoCode'])}"
+                                         value="Enter Code"/>
+                        <p/><h:message for="promoCode"  errorStyle="color: red"/>
+                    </h:form>
+                </td>
+            </table>
+
+        </div>
+    </ui:define>
+
+</ui:composition>

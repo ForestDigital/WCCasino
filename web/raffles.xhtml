@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/masterLayout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="contentSection">
+        <div id="gameBox">
+            <h:panelGrid columns ="3">
+                <p:panel id ="prizeBox" header="Current Prize:">
+                    <p:graphicImage value="/ImageServlet?filename=#{'isk.png'}"/>
+                    <br/>
+                    <h:outputText id="txtCurrentPrize" value="#{raffleBean.currentPrize}"/>
+                </p:panel>
+                <p:panel id ="rafflesLeftBox">
+                    Raffles<br/>Left:<br/>
+                    <h:outputText id="txtRafflesLeft" value="#{raffleBean.rafflesLeft}"/>
+                    <br/>
+                </p:panel>
+                <p:panel id="buyRafflesBox">
+                    <!--                <p:growl id="messages" showDetail="true"/>-->
+                    <h:form>
+                        Price per raffle ticket:<br/>
+                        <h:outputText id="txtRafflePrice" value="#{raffleBean.pricePerTicket}"/>
+                        <br/>
+                        <p:growl id="messages" showDetail="true"/>
+                        <p:commandButton rendered="#{loginBean.loggedIn}" value="Buy 1 Ticket!" actionListener="#{raffleBean.purchaseTickets(1)}" update=":userBalance, messages,  txtRafflePrice, :txtCurrentPrize, :txtRafflesLeft"/><br/>
+                        <p:commandButton rendered="#{not loginBean.loggedIn}" value="Buy 1 Ticket!" action="notLoggedIn" update=":userBalance, messages,  txtRafflePrice, :txtCurrentPrize, :txtRafflesLeft"/><br/>
+                        <p:commandButton rendered="#{loginBean.loggedIn}" value="Buy 3 Tickets!" actionListener="#{raffleBean.purchaseTickets(3)}" update=":userBalance, messages, txtRafflePrice, :txtCurrentPrize, :txtRafflesLeft"/><br/>
+                        <p:commandButton rendered="#{not loginBean.loggedIn}" value="Buy 3 Tickets!" action="notLoggedIn" update=":userBalance, messages, txtRafflePrice, :txtCurrentPrize, :txtRafflesLeft"/><br/>
+                        <p:commandButton rendered="#{loginBean.loggedIn}" value="Buy 5 Tickets!" actionListener="#{raffleBean.purchaseTickets(5)}" update=":userBalance, messages, txtRafflePrice, :txtCurrentPrize, :txtRafflesLeft"/><br/>
+                        <p:commandButton rendered="#{not loginBean.loggedIn}" value="Buy 5 Tickets!" action="notLoggedIn" update=":userBalance, messages, txtRafflePrice, :txtCurrentPrize, :txtRafflesLeft"/><br/>
+                    </h:form>
+                </p:panel>
+            </h:panelGrid>
+        </div>
+    </ui:define>
+
+</ui:composition>

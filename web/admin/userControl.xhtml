@@ -1,0 +1,53 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/masterLayout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="contentSection">
+        <div id="gameBox">
+            <h:form id = "users">
+                <p:growl id="message" showDetail="true" />
+                <h:dataTable value="#{adminBean.userList}" var="u">
+                    <f:facet name="caption">Registered Players</f:facet>
+                    <h:column>
+                        <f:facet name="header">Username</f:facet>
+                        <h:outputText value="#{u.username}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Profile</f:facet>
+                        <image src="/projectJosiahP/ImageServlet?filename=#{u.profilePic}"
+                               height="100" width="100" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Bio</f:facet>
+                        <h:outputText value="#{u.bio}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Account Balance</f:facet>
+                        <p:spinner id ="ubal" value="#{u.balance}" min="0" >
+                            <p:ajax process="@this"/>
+                        </p:spinner>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Actions</f:facet>
+                        <h:commandButton value="Update Balance" action="#{adminBean.updateBalance(u.username, u.balance)}" />
+
+                        <p:commandButton styleClass="buttons" value="Remove User" actionListener="#{adminBean.removeUser(u)}" update=":users:message">
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                    </h:column>
+
+                </h:dataTable>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>
