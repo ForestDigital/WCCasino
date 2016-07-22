@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <managed-bean>
+        <managed-bean-name>loginBean</managed-bean-name>
+        <managed-bean-class>com.google.josiahparrish9844.loginBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>  
+    
+    <managed-bean>
+        <managed-bean-name>FileBean</managed-bean-name>
+        <managed-bean-class>com.google.josiahparrish9844.FileBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>lb</property-name>
+            <value>#{loginBean}</value>
+        </managed-property>
+    </managed-bean>    
+
+    <managed-bean>
+        <managed-bean-name>lotteryBean</managed-bean-name>
+        <managed-bean-class>com.google.josiahparrish9844.LotteryBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>cashier</property-name>
+            <value>#{cashierBean}</value>
+        </managed-property>
+    </managed-bean>    
+
+    <managed-bean>
+        <managed-bean-name>cashierBean</managed-bean-name>
+        <managed-bean-class>com.google.josiahparrish9844.CashierBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>raffleBean</managed-bean-name>
+        <managed-bean-class>com.google.josiahparrish9844.RaffleBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>cashier</property-name>
+            <value>#{cashierBean}</value>
+        </managed-property>
+    </managed-bean>
+</faces-config>
